@@ -48,3 +48,4 @@ $router->get('/', 'Welcome::index');
 
 $router->get('/student', 'StudentController::index');
 $router->get('/student/profile', 'StudentController::profile', ['middleware' => ['student']]);
+$router->get('/student/clear', 'StudentController::clear');

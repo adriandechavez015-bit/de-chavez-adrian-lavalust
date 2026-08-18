@@ -36,6 +36,16 @@
             font-weight: bold;
         }
 
+        .tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #334155;
+            padding: 4px 10px;
+            margin: 3px;
+            border-radius: 12px;
+            font-size: 13px;
+        }
+
         .nav {
             text-align: center;
             margin-top: 30px;
@@ -93,9 +103,32 @@
         <?= $email ?>
     </div>
 
+    <div class="info">
+        <span class="label">About Me:</span>
+        <p style="margin: 8px 0 0 0; color: #444;"><?= $description ?></p>
+    </div>
+
+    <div class="info">
+        <span class="label">Technical Skills:</span><br>
+        <div style="margin-top: 8px;">
+            <?php foreach ($skills as $skill): ?>
+                <span class="tag"><?= $skill ?></span>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="info">
+        <span class="label">Hobbies:</span><br>
+        <div style="margin-top: 8px;">
+            <?php foreach ($hobbies as $hobby): ?>
+                <span class="tag" style="background: #dcfce7; color: #166534;"><?= $hobby ?></span>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
     <div class="nav">
-       <a href="/lavalust/student">Home</a>
-<a href="/lavalust/student/profile">Student Profile</a>
+        <a href="/lavalust/student">Home</a>
+        <a href="/lavalust/student/profile">Student Profile</a>
     </div>
 
 </div>
