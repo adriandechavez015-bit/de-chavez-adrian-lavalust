@@ -59,9 +59,9 @@
     </p>
 
     <div class="nav">
-        <a href="/lavalust/student">Home</a>
-<a href="/lavalust/student/profile">Student Profile</a>
-    </div>
+    <a href="<?= site_url('student'); ?>">Home</a>
+    <a href="<?= site_url('student/profile'); ?>">Student Profile</a>
+</div>
 
 </div>
 

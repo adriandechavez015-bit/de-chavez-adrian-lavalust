@@ -79,8 +79,14 @@ $config['environment'] = getenv('APP_ENV') ?: 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= '';
-
+// Instead of a hardcoded path with /lavalust/
+if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1') {
+    // Localhost (Laragon) needs the folder name
+    $config['base_url'] = 'http://localhost/lavalust/';
+} else {
+    // Render (Production) runs from the root domain
+    $config['base_url'] = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+}
 /*
 |--------------------------------------------------------------------------
 | Static File Proxies

@@ -8,7 +8,7 @@ class StudentController extends Controller {
             session_start();
         }
         
-        // Grant access when visiting the home page
+        // Grant access when visiting home page
         $_SESSION['student_access'] = true;
 
         $this->call->view('student_home');
@@ -19,9 +19,9 @@ class StudentController extends Controller {
             session_start();
         }
 
-        // Middleware check: Redirect if session is missing or false
+        // Middleware check
         if (!isset($_SESSION['student_access']) || $_SESSION['student_access'] !== true) {
-            header("Location: http://localhost/lavalust/student");
+            header("Location: " . site_url('student'));
             exit();
         }
 
@@ -45,12 +45,10 @@ class StudentController extends Controller {
             session_start();
         }
         
-        // Destroy session to simulate being unauthorized
         unset($_SESSION['student_access']);
         session_destroy();
         
-        // Try accessing profile immediately -> will trigger redirect back to home
-        header("Location: http://localhost/lavalust/student/profile");
+        header("Location: " . site_url('student/profile'));
         exit();
     }
 }
