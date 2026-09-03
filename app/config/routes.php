@@ -52,3 +52,4 @@ $router->get('/student/clear', 'StudentController::clear');
 
 
 $route['users'] = 'UsersController/index';
+
