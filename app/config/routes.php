@@ -50,6 +50,6 @@ $router->get('/student', 'StudentController::index');
 $router->get('/student/profile', 'StudentController::profile', ['middleware' => ['student']]);
 $router->get('/student/clear', 'StudentController::clear');
 
+$router->get('/users', 'UsersController::index');
 
-$route['users'] = 'UsersController/index';
 

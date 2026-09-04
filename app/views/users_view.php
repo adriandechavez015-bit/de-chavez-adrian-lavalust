@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Users List</title>
+    <title>User List</title>
     <style>
         table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
     </style>
 </head>
 <body>
-    <h2>User List</h2>
+    <h2>Users List</h2>
     <table>
         <thead>
             <tr>
