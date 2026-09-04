@@ -79,7 +79,18 @@ $config['environment'] = getenv('APP_ENV') ?: 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] = getenv('APP_URL') ?: 'http://localhost/lavalust/';
+if (getenv('APP_URL')) {
+    // Keeps support for your other activity if APP_URL is defined in .env
+    $config['base_url'] = getenv('APP_URL');
+} elseif (isset($_SERVER['HTTP_HOST']) && ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1')) {
+    // Localhost / Laragon environment
+    $config['base_url'] = 'http://localhost/lavalust/';
+} else {
+    // Live Render environment
+    $protocol = (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'de-chavez-adrian.onrender.com';
+    $config['base_url'] = $protocol . '://' . $host . '/';
+}
 /*
 |--------------------------------------------------------------------------
 | Static File Proxies
