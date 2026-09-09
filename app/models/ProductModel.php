@@ -4,8 +4,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 class ProductModel extends Model {
     protected $table = 'products';
 
+    // Fetch active products only
     public function all() {
-        return $this->db->table($this->table)->get_all();
+        return $this->db->table($this->table)->where('is_deleted', 0)->get_all();
     }
 
     public function find($id) {
@@ -20,7 +21,8 @@ class ProductModel extends Model {
         return $this->db->table($this->table)->where('id', $id)->update($data);
     }
 
+    // Soft Delete: Sets is_deleted flag to 1 instead of removing row
     public function delete($id) {
-        return $this->db->table($this->table)->where('id', $id)->delete();
+        return $this->db->table($this->table)->where('id', $id)->update(['is_deleted' => 1]);
     }
 }
