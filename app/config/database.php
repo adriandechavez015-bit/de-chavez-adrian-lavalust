@@ -62,12 +62,24 @@ $database['main'] = array(
     'hostname'	=> getenv('DB_HOST') ?: 'mysql-3ffb58d0-adriandechavez015-f822.j.aivencloud.com',
     'port'		=> getenv('DB_PORT') ?: '25918',
     'username'	=> getenv('DB_USERNAME') ?: 'avnadmin',
-    'password'	=> getenv('DB_PASSWORD') ?: '**********',
+    'password'	=> getenv('DB_PASSWORD') ,
     'database'	=> getenv('DB_NAME') ?: 'mydb',
-    'charset'	=> 'utf8mb4',
+    'charset'	=> '',
     'dbprefix'	=> '',
     // Optional for SQLite
     'path'      => ''
 );
 
+
+
+$database['crud_pdo'] = array(
+    'driver'    => 'pdo',
+    'hostname'  => 'localhost',
+    'port'      => '3306',
+    'username'  => 'root',
+    'password'  => '',
+    'database'  => 'crud_student',
+    'charset'   => 'utf8mb4',
+    'dbprefix'  => '',
+    'path'      => ''
 ?>
