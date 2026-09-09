@@ -57,12 +57,10 @@ $router->get('/users', 'UsersController::index');
 
 
 // Default home route points to the login page
-$route['default_controller']      = 'AuthController/login';
-
-// Auth routes
-$route['login']                   = 'AuthController/login';
-$route['login/submit']            = 'AuthController/login_submit';
-$route['logout']                  = 'AuthController/logout';
+$route['default_controller'] = 'AuthController';
+$route['login']             = 'AuthController';
+$route['login/submit']      = 'AuthController/login_submit';
+$route['logout']            = 'AuthController/logout';
 
 // Protected Product CRUD routes
 $route['products']                = 'ProductController/index';
