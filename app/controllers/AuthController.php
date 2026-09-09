@@ -14,10 +14,9 @@ class AuthController extends Controller {
         $username = $this->io->post('username');
         $password = $this->io->post('password');
 
-        $this->call->model('UsersModel');
-        $user = $this->UsersModel->get_by_username($username);
+        $this->call->model('AccountsModel');
+        $user = $this->AccountsModel->get_by_username($username);
 
-        // Replace with password_verify() if you hashed passwords in DB
         if ($user && $user['password'] === $password) {
             $this->session->set_userdata([
                 'user_id'   => $user['id'],

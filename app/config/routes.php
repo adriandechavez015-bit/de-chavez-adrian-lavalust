@@ -57,17 +57,18 @@ $router->get('/users', 'UsersController::index');
 
 
 
-$route['login']               = 'AuthController/login';
-$route['login/submit']        = 'AuthController/login_submit';
-$route['logout']              = 'AuthController/logout';
+$route['default_controller']     = 'AuthController/login';
 
-$route['products']            = 'ProductController/index';
-$route['products/create']     = 'ProductController/create';
-$route['products/store']      = 'ProductController/store';
-$route['products/edit/(:num)']= 'ProductController/edit/$1';
+$route['login']                  = 'AuthController/login';
+$route['login/submit']           = 'AuthController/login_submit';
+$route['logout']                 = 'AuthController/logout';
+
+$route['products']               = 'ProductController/index';
+$route['products/create']        = 'ProductController/create';
+$route['products/store']         = 'ProductController/store';
+$route['products/edit/(:num)']   = 'ProductController/edit/$1';
 $route['products/update/(:num)']= 'ProductController/update/$1';
 $route['products/delete/(:num)']= 'ProductController/delete/$1';
-
 
 
 
