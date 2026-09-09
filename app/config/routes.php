@@ -62,9 +62,12 @@ $router->post('/login/submit', 'AuthController::login_submit');
 $router->get('/logout', 'AuthController::logout');
 
 // Lab Exercise No. 5: Product CRUD Routes
+// Product CRUD Routes
 $router->get('/products', 'ProductController::index');
 $router->get('/products/create', 'ProductController::create');
 $router->post('/products/store', 'ProductController::store');
+
+// Add $1 to correctly pass the dynamic ID
 $router->get('/products/edit/(:num)', 'ProductController::edit/$1');
 $router->post('/products/update/(:num)', 'ProductController::update/$1');
 $router->get('/products/delete/(:num)', 'ProductController::delete/$1');
