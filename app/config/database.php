@@ -72,14 +72,3 @@ $database['main'] = array(
 
 
 
-$database['crud_pdo'] = array(
-    'driver'    => 'pdo',
-    'hostname'  => 'localhost',
-    'port'      => '3306',
-    'username'  => 'root',
-    'password'  => '',
-    'database'  => 'crud_student',
-    'charset'   => 'utf8mb4',
-    'dbprefix'  => '',
-    'path'      => ''
-?>
