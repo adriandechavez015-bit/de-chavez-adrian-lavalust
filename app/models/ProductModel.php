@@ -9,8 +9,8 @@ class ProductModel extends Model {
     }
 
     public function find($id) {
-    return $this->db->table($this->table)->where('id', $id)->get_one();
-}
+        return $this->db->table($this->table)->where('id', $id)->get();
+    }
 
     public function insert($data) {
         return $this->db->table($this->table)->insert($data);
