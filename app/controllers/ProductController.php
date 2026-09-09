@@ -33,10 +33,13 @@ class ProductController extends Controller {
     }
 
     public function edit($id) {
-        $this->call->model('ProductModel');
-        $data['product'] = $this->ProductModel->find($id);
-        $this->call->view('products/edit', $data);
-    }
+    $this->call->model('ProductModel');
+    // Fetch product record as a single array
+    $data['product'] = $this->ProductModel->find($id);
+
+    // Pass $data into the view
+    $this->call->view('products/edit', $data);
+}
 
     public function update($id) {
         $this->call->model('ProductModel');

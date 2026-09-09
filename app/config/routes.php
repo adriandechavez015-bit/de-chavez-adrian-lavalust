@@ -49,7 +49,7 @@ $router->get('/student/profile', 'StudentController::profile', ['middleware' => 
 $router->get('/student/clear', 'StudentController::clear');
 $router->get('/users', 'UsersController::index');
 
-// Auth Routes
+
 $router->get('/login', 'AuthController::login');
 $router->post('/login/submit', 'AuthController::login_submit');
 $router->get('/logout', 'AuthController::logout');
@@ -58,6 +58,8 @@ $router->get('/logout', 'AuthController::logout');
 $router->get('/products', 'ProductController::index');
 $router->get('/products/create', 'ProductController::create');
 $router->post('/products/store', 'ProductController::store');
-$router->get('/products/edit/(:num)', 'ProductController::edit/$1');
-$router->post('/products/update/(:num)', 'ProductController::update/$1');
-$router->get('/products/delete/(:num)', 'ProductController::delete/$1');
+
+// Use {id} segment pattern instead of (:num) with $router
+$router->get('/products/edit/{id}', 'ProductController::edit');
+$router->post('/products/update/{id}', 'ProductController::update');
+$router->get('/products/delete/{id}', 'ProductController::delete');
