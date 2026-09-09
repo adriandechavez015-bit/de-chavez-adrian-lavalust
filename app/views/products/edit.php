@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Edit Product</h2>
-    <form action="<?= site_url('products/update/' . $product['id']); ?>" method="POST">
+    <form action="<?= site_url('index.php/products/update/' . $product['id']); ?>" method="POST">
         <label>Product Name:</label><br>
         <input type="text" name="product_name" value="<?= htmlspecialchars($product['product_name']); ?>" required><br><br>
 
@@ -19,7 +19,7 @@
         <input type="number" name="quantity" value="<?= $product['quantity']; ?>" required><br><br>
 
         <button type="submit">Update Product</button>
-        <a href="<?= site_url('products'); ?>">Cancel</a>
+        <a href="<?= site_url('index.php/products'); ?>">Cancel</a>
     </form>
 </body>
 </html>

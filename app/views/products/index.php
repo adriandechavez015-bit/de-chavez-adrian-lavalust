@@ -5,9 +5,9 @@
 </head>
 <body>
     <h2>Product Management</h2>
-    <p>Logged in as: <strong><?= htmlspecialchars($_SESSION['username'] ?? 'User'); ?></strong> | <a href="<?= site_url('logout'); ?>">Logout</a></p>
+    <p>Logged in as: <strong><?= htmlspecialchars($_SESSION['username'] ?? 'User'); ?></strong> | <a href="<?= site_url('index.php/logout'); ?>">Logout</a></p>
 
-    <a href="<?= site_url('products/create'); ?>">+ Add New Product</a>
+    <a href="<?= site_url('index.php/products/create'); ?>">+ Add New Product</a>
     <br><br>
 
     <table border="1" cellpadding="8" cellspacing="0">
@@ -31,8 +31,8 @@
                     <td>$<?= number_format($p['price'], 2); ?></td>
                     <td><?= $p['quantity']; ?></td>
                     <td>
-                        <a href="<?= site_url('products/edit/' . $p['id']); ?>">Edit</a> | 
-                        <a href="<?= site_url('products/delete/' . $p['id']); ?>" onclick="return confirm('Delete item?');">Delete</a>
+                        <a href="<?= site_url('index.php/products/edit/' . $p['id']); ?>">Edit</a> | 
+                        <a href="<?= site_url('index.php/products/delete/' . $p['id']); ?>" onclick="return confirm('Delete item?');">Delete</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
