@@ -56,20 +56,19 @@ $router->get('/users', 'UsersController::index');
 
 
 
+$route['default_controller'] = 'AuthController/login';
+$route['login']              = 'AuthController/login';
+$route['login/submit']       = 'AuthController/login_submit';
+$route['logout']             = 'AuthController/logout';
 
-
-// Default home route points to the login page
-$route['default_controller'] = 'AuthController';
-$route['login']             = 'AuthController';
-$route['login/submit']      = 'AuthController/login_submit';
-$route['logout']            = 'AuthController/logout';
-
-// Protected Product CRUD routes
-$route['products']                = 'ProductController/index';
-$route['products/create']         = 'ProductController/create';
-$route['products/store']          = 'ProductController/store';
-$route['products/edit/(:num)']    = 'ProductController/edit/$1';
-$route['products/update/(:num)']  = 'ProductController/update/$1';
-$route['products/delete/(:num)']  = 'ProductController/delete/$1';
-
-
+/*
+|--------------------------------------------------------------------------
+| Lab Exercise No. 5: Protected Product CRUD Routes
+|--------------------------------------------------------------------------
+*/
+$route['products']               = 'ProductController/index';
+$route['products/create']        = 'ProductController/create';
+$route['products/store']         = 'ProductController/store';
+$route['products/edit/(:num)']   = 'ProductController/edit/$1';
+$route['products/update/(:num)'] = 'ProductController/update/$1';
+$route['products/delete/(:num)'] = 'ProductController/delete/$1';
