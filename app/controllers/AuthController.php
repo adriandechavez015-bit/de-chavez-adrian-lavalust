@@ -3,8 +3,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class AuthController extends Controller {
 
-    // Default method called when accessing /login or default_controller
-    public function index() {
+    // Matches $router->get('/login', 'AuthController::login')
+    public function login() {
         if ($this->session->userdata('logged_in')) {
             redirect('products');
         }
