@@ -127,6 +127,9 @@ $config['index_page'] = '';
 $config['log_threshold']            = 0;
 $config['log_dir']                  = 'runtime/logs/';
 
+
+
+$config['uri_protocol'] = 'REQUEST_URI';
 /*
 |--------------------------------------------------------------------------
 | Composer auto-loading
