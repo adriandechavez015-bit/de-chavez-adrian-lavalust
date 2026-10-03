@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:3000/api';
-
+const API_BASE_URL = 'https://de-chavez-adrian-lavalust.onrender.com/api';
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [username, setUsername] = useState('');
