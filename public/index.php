@@ -45,57 +45,44 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * 
  * NO TRAILING SLASH!
  */
-	$system_path 			= 'scheme';
+	$system_path        = 'scheme';
+$application_folder = 'app';
+$public_folder      = 'public';
 
 /*
- *---------------------------------------------------------------
- * APPLICATION DIRECTORY NAME
- *---------------------------------------------------------------
- *
- * If you want this front controller to use a different "app"
- * directory than the default one you can set its name here.
- *
- * NO TRAILING SLASH!
+ * ------------------------------------------------------
+ * CORS Preflight & Response Headers
+ * ------------------------------------------------------
  */
-	$application_folder 	= 'app';
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+} else {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+}
 
-/*
- *---------------------------------------------------------------
- * APPLICATION DIRECTORY NAME
- *---------------------------------------------------------------
- * This let you set up your public folder where css, js and other public,
- * files will be visible
- */
-	$public_folder			= 'public';
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit(0);
+}
 
 /*
  * ------------------------------------------------------
  * Define Application Constants
  * ------------------------------------------------------
  */
-// Intercept and handle CORS preflight OPTIONS requests immediately
-if (isset($_SERVER['HTTP_ORIGIN'])) {
-    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-    header("Access-Control-Allow-Credentials: true");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit(0);
-}
-
-
-define('ROOT_DIR',  dirname(__DIR__) . DIRECTORY_SEPARATOR);
+define('ROOT_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
 define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);
-define('PUBLIC_DIR', $public_folder);
+define('PUBLIC_DIR', ROOT_DIR . $public_folder . DIRECTORY_SEPARATOR);
 
 /*
  * ------------------------------------------------------
- * Setup done? Then Hurray!
+ * Launch LavaLust Core
  * ------------------------------------------------------
  */
 require_once SYSTEM_DIR . 'kernel/LavaLust.php';
-?>

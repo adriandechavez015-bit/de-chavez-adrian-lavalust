@@ -86,11 +86,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Auth Routes (Matches api_AuthController.php)
+// Auth Routes (Matches app/controllers/api_AuthController.php)
 $route['api/login']    = 'api_AuthController/login';
 $route['api/register'] = 'api_AuthController/register';
 
-// Product Routes (Matches Product_Controller.php - Notice the capital C)
+// Product Routes (Matches app/controllers/Product_Controller.php)
 $route['api/products']        = 'Product_Controller/index';
 $route['api/products/create'] = 'Product_Controller/create';
 $route['api/products/(:any)'] = 'Product_Controller/update/$1';
