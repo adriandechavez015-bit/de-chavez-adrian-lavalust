@@ -82,16 +82,25 @@ $router->get('refresh', 'MigrationController::refresh');
 $router->get('status', 'MigrationController::status');
 
 
+
+
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// API Auth Routes
-$route['api/login']['POST']    = 'api_AuthController/login';
-$route['api/register']['POST'] = 'api_AuthController/register';
+/*
+| -------------------------------------------------------------------
+| API AUTH ROUTES
+| -------------------------------------------------------------------
+*/
+$route['api/login']    = 'api_AuthController/login';
+$route['api/register'] = 'api_AuthController/register';
 
-// API Protected Product Routes
-$route['api/products']['GET']     = 'Product_controller/index';
-$route['api/products']['POST']    = 'Product_controller/create';
-$route['api/products/(:any)']['PUT']    = 'Product_controller/update/$1';
-$route['api/products/(:any)']['DELETE'] = 'Product_controller/delete/$1';
+/*
+| -------------------------------------------------------------------
+| API PRODUCT ROUTES
+| -------------------------------------------------------------------
+*/
+$route['api/products']          = 'Product_controller/index';
+$route['api/products/create']   = 'Product_controller/create';
+$route['api/products/(:any)']   = 'Product_controller/update/$1';
