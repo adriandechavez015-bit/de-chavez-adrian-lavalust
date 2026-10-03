@@ -59,7 +59,35 @@ $router->get('/products', 'ProductController::index');
 $router->get('/products/create', 'ProductController::create');
 $router->post('/products/store', 'ProductController::store');
 
-// Use {id} segment pattern instead of (:num) with $router
+
 $router->get('/products/edit/{id}', 'ProductController::edit');
 $router->post('/products/update/{id}', 'ProductController::update');
 $router->get('/products/delete/{id}', 'ProductController::delete');
+
+
+
+
+
+//Migration routes
+$router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
+
+$router->get('migrate', 'MigrationController::migrate');
+
+$router->get('rollback', 'MigrationController::rollback');
+
+$router->get('rollback-all', 'MigrationController::rollback_all');
+
+$router->get('refresh', 'MigrationController::refresh');
+
+$router->get('status', 'MigrationController::status');
+
+
+// API Auth Routes
+$router->post('api/login', 'api_AuthController::login');
+$router->post('api/register', 'api_AuthController::register');
+
+// API Protected Product Routes
+$router->get('api/products', 'Product_controller::index');
+$router->post('api/products', 'Product_controller::create');
+$router->put('api/products/{id}', 'Product_controller::update');
+$router->delete('api/products/{id}', 'Product_controller::delete');

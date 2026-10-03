@@ -73,6 +73,20 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * Define Application Constants
  * ------------------------------------------------------
  */
+// Intercept and handle CORS preflight OPTIONS requests immediately
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit(0);
+}
+
+
 define('ROOT_DIR',  dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
 define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);
