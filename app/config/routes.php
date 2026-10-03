@@ -82,6 +82,10 @@ $router->get('refresh', 'MigrationController::refresh');
 $router->get('status', 'MigrationController::status');
 
 
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
 // API Auth Routes
 $route['api/login']['POST']    = 'api_AuthController/login';
 $route['api/register']['POST'] = 'api_AuthController/register';
