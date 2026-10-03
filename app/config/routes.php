@@ -83,24 +83,23 @@ $router->get('status', 'MigrationController::status');
 
 
 
-
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-/*
-| -------------------------------------------------------------------
-| API AUTH ROUTES
-| -------------------------------------------------------------------
-*/
-$route['api/login']    = 'api_AuthController/login';
-$route['api/register'] = 'api_AuthController/register';
+// API Auth Routes
+$route['api/login']     = 'api_AuthController/login';
+$route['/api/login']    = 'api_AuthController/login';
 
-/*
-| -------------------------------------------------------------------
-| API PRODUCT ROUTES
-| -------------------------------------------------------------------
-*/
-$route['api/products']          = 'Product_controller/index';
-$route['api/products/create']   = 'Product_controller/create';
-$route['api/products/(:any)']   = 'Product_controller/update/$1';
+$route['api/register']  = 'api_AuthController/register';
+$route['/api/register'] = 'api_AuthController/register';
+
+// API Product Routes
+$route['api/products']           = 'Product_controller/index';
+$route['/api/products']          = 'Product_controller/index';
+
+$route['api/products/create']    = 'Product_controller/create';
+$route['/api/products/create']   = 'Product_controller/create';
+
+$route['api/products/(:any)']    = 'Product_controller/update/$1';
+$route['/api/products/(:any)']   = 'Product_controller/update/$1';
