@@ -83,11 +83,11 @@ $router->get('status', 'MigrationController::status');
 
 
 // API Auth Routes
-$router->post('api/login', 'api_AuthController::login');
-$router->post('api/register', 'api_AuthController::register');
+$route['api/login']['POST']    = 'api_AuthController/login';
+$route['api/register']['POST'] = 'api_AuthController/register';
 
 // API Protected Product Routes
-$router->get('api/products', 'Product_controller::index');
-$router->post('api/products', 'Product_controller::create');
-$router->put('api/products/{id}', 'Product_controller::update');
-$router->delete('api/products/{id}', 'Product_controller::delete');
+$route['api/products']['GET']     = 'Product_controller/index';
+$route['api/products']['POST']    = 'Product_controller/create';
+$route['api/products/(:any)']['PUT']    = 'Product_controller/update/$1';
+$route['api/products/(:any)']['DELETE'] = 'Product_controller/delete/$1';
