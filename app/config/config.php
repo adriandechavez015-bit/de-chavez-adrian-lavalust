@@ -129,7 +129,7 @@ $config['log_dir']                  = 'runtime/logs/';
 
 
 
-$config['uri_protocol'] = 'PATH_INFO';
+$config['uri_protocol'] = 'AUTO';
 /*
 |--------------------------------------------------------------------------
 | Composer auto-loading
