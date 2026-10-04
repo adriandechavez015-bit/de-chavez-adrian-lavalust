@@ -35,11 +35,13 @@ function App() {
   };
 
   const handleLogout = () => {
-    setToken('');
+  const confirmLogout = window.confirm("Are you sure you want to log out?");
+  if (confirmLogout) {
+    // Clear user session/token and reset state
+    setUser(null);
     localStorage.removeItem('token');
-    setProducts([]);
-    setErrorMessage('');
-  };
+  }
+};
 
   const fetchProducts = async () => {
     if (!token) return;
