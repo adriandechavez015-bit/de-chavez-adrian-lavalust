@@ -36,10 +36,20 @@ function App() {
 
   const handleLogout = () => {
   const confirmLogout = window.confirm("Are you sure you want to log out?");
+  
   if (confirmLogout) {
-    // Clear user session/token and reset state
-    setUser(null);
-    localStorage.removeItem('token');
+    //  Clear session/token stored in browser
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    sessionStorage.clear();
+
+    // Clear state variable
+    if (typeof setUser === "function") {
+      setUser(null);
+    }
+
+    //  Force redirect
+    window.location.href = "/"; 
   }
 };
 
