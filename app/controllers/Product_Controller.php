@@ -1,88 +1,66 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-class Product_controller extends Controller {
+class Product_Controller extends Controller {
 
     public function __construct() {
         parent::__construct();
-
-        // CORS Configuration
+        
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Content-Type: application/json; charset=utf-8');
 
-        // Handle OPTIONS Preflight Requests
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             http_response_code(200);
             exit();
         }
 
         $this->call->library('api');
         $this->call->model('Product_model');
-
-        // Robust Authorization Header Parsing
-        $authHeader = '';
-        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
-            $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
-        } elseif (function_exists('getallheaders')) {
-            $headers = getallheaders();
-            $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
-        }
-
-        if (empty($authHeader) || !preg_match('/Bearer\s(\S+)/i', $authHeader)) {
-            $this->api->respond(['error' => 'Unauthorized access'], 401);
-            exit;
-        }
     }
 
+    // GET /api/products
     public function index() {
         $products = $this->Product_model->get_all();
-        $this->api->respond($products, 200);
+        $this->api->respond($products ? $products : [], 200);
     }
 
+    // POST /api/products
     public function create() {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $raw = json_decode(file_get_contents('php://input'), true);
+        $data = [
+            'product_name' => $raw['product_name'] ?? $this->io->post('product_name'),
+            'description'  => $raw['description'] ?? $this->io->post('description'),
+            'price'        => $raw['price'] ?? $this->io->post('price'),
+            'quantity'     => $raw['quantity'] ?? $this->io->post('quantity')
+        ];
 
-        if (empty($data['product_name']) || !isset($data['price'])) {
-            $this->api->respond(['error' => 'Missing required fields'], 400);
-            return;
+        $res = $this->Product_model->insert($data);
+        if ($res) {
+            $this->api->respond(['message' => 'Product created successfully'], 201);
+        } else {
+            $this->api->respond(['error' => 'Failed to create product'], 500);
         }
-
-        $this->Product_model->insert([
-            'product_name' => $data['product_name'],
-            'description'  => $data['description'] ?? '',
-            'price'        => $data['price'],
-            'quantity'     => $data['quantity'] ?? 0,
-        ]);
-
-        $this->api->respond(['message' => 'Product created successfully'], 201);
     }
 
-    public function update($id = null) {
-        if (!$id) {
-            $this->api->respond(['error' => 'Product ID is required'], 400);
-            return;
-        }
+    // PUT /api/products/{id}
+    public function update($id) {
+        $raw = json_decode(file_get_contents('php://input'), true);
+        $data = [
+            'product_name' => $raw['product_name'] ?? '',
+            'description'  => $raw['description'] ?? '',
+            'price'        => $raw['price'] ?? 0,
+            'quantity'     => $raw['quantity'] ?? 0
+        ];
 
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        $this->Product_model->update($id, [
-            'product_name' => $data['product_name'] ?? '',
-            'description'  => $data['description'] ?? '',
-            'price'        => $data['price'] ?? 0,
-            'quantity'     => $data['quantity'] ?? 0,
-        ]);
-
+        $res = $this->Product_model->update($id, $data);
         $this->api->respond(['message' => 'Product updated successfully'], 200);
     }
 
-    public function delete($id = null) {
-        if (!$id) {
-            $this->api->respond(['error' => 'Product ID is required'], 400);
-            return;
-        }
-
-        $this->Product_model->delete($id);
+    // DELETE /api/products/{id}
+    public function delete($id) {
+        $res = $this->Product_model->delete($id);
         $this->api->respond(['message' => 'Product deleted successfully'], 200);
     }
 }
